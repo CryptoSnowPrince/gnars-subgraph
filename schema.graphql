@@ -1,0 +1,57 @@
+type Approval @entity {
+  id: ID!
+  owner: Bytes! # address
+  approved: Bytes! # address
+  tokenId: BigInt! # uint256
+}
+
+type ApprovalForAll @entity {
+  id: ID!
+  owner: Bytes! # address
+  operator: Bytes! # address
+  approved: Boolean! # bool
+}
+
+type AuctionBid @entity {
+  id: ID!
+  gnarId: BigInt! # uint256
+  sender: Bytes! # address
+  value: BigInt! # uint256
+  timestamp: BigInt! # uint256
+}
+
+type AuctionCreated @entity {
+  id: ID!
+  gnarId: BigInt! # uint256
+}
+
+type AuctionSettled @entity {
+  id: ID!
+  gnarId: BigInt! # uint256
+  winner: Bytes! # address
+  amount: BigInt! # uint256
+  timestamp: BigInt! # uint256
+}
+
+type MinBidIncrementPercentageUpdated @entity {
+  id: ID!
+  percent: Int! # uint8
+}
+
+type OwnershipTransferred @entity {
+  id: ID!
+  previousOwner: Bytes! # address
+  newOwner: Bytes! # address
+}
+
+type ReservePriceUpdated @entity {
+  id: ID!
+  price: BigInt! # uint256
+}
+
+type Transfer @entity {
+  id: ID!
+  from: Bytes! # address
+  to: Bytes! # address
+  tokenId: BigInt! # uint256
+}

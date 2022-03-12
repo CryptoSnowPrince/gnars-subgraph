@@ -1,0 +1,48 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: SkateContract
+    network: mainnet
+    source:
+      address: "0x494715B2a3C75DaDd24929835B658a1c19bd4552"
+      abi: SkateContract
+      startBlock: 14211100
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - ApprovalForAll
+        - AuctionBid
+        - AuctionCreated
+        - AuctionSettled
+        - MinBidIncrementPercentageUpdated
+        - OwnershipTransferred
+        - ReservePriceUpdated
+        - Transfer
+      abis:
+        - name: SkateContract
+          file: ./abis/SkateContract.json
+      eventHandlers:
+        - event: Approval(indexed address,indexed address,indexed uint256)
+          handler: handleApproval
+        - event: ApprovalForAll(indexed address,indexed address,bool)
+          handler: handleApprovalForAll
+        - event: AuctionBid(indexed uint256,address,uint256,uint256)
+          handler: handleAuctionBid
+        - event: AuctionCreated(indexed uint256)
+          handler: handleAuctionCreated
+        - event: AuctionSettled(indexed uint256,address,uint256,uint256)
+          handler: handleAuctionSettled
+        - event: MinBidIncrementPercentageUpdated(uint8)
+          handler: handleMinBidIncrementPercentageUpdated
+        - event: OwnershipTransferred(indexed address,indexed address)
+          handler: handleOwnershipTransferred
+        - event: ReservePriceUpdated(uint256)
+          handler: handleReservePriceUpdated
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/mapping.ts
